@@ -1,0 +1,68 @@
+# Neural Machine Translation Configuration
+# Edit this file to customize model training
+
+# Model Architecture
+model:
+  layers: 2
+  rnn_size: 512
+  word_vec_size: 512
+  bidirectional_encoder: true
+  input_feed: true
+  dropout: 0.3
+  attention_type: 'general'  # Options: dot, general, concat
+
+# Training Parameters
+training:
+  batch_size: 64
+  max_epochs: 30
+  start_epoch: 1
+  optimizer: 'adam'  # Options: sgd, adam, adagrad, adadelta
+  learning_rate: 0.001
+  max_grad_norm: 5.0
+  learning_rate_decay: 0.5
+  start_decay_at: 10
+  param_init: 0.1
+  
+# Advanced Training
+advanced:
+  mixed_precision: false
+  gradient_accumulation_steps: 1
+  warmup_steps: 4000
+  label_smoothing: 0.1
+  early_stopping_patience: 10
+
+# Reinforcement Learning
+reinforcement:
+  enabled: false
+  start_reinforce_epoch: 15
+  critic_pretrain_epochs: 5
+  reinforce_lr: 0.0001
+  reward_shaping_function: null  # Options: linear, exponential
+  reward_shaping_param: null
+
+# Data
+data:
+  src_vocab_size: 50000
+  tgt_vocab_size: 50000
+  max_seq_length: 80
+  share_vocab: false
+
+# Generation/Translation
+generation:
+  beam_size: 5
+  max_length: 100
+  n_best: 1
+  replace_unk: false
+
+# Hardware
+hardware:
+  gpus: [0]
+  seed: 3435
+
+# Logging
+logging:
+  log_interval: 100
+  save_checkpoint_epochs: 1
+  tensorboard: true
+  wandb: false
+  wandb_project: 'nmt-translation'
